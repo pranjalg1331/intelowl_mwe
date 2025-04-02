@@ -1,21 +1,14 @@
 import unittest
-from base_analyzer import BaseAnalyzer
 
-class BaseAnalyzerTestCase(unittest.TestCase):
-    analyzers = []
-
-    @classmethod
-    def setUpClass(cls):
-        cls.analyzers = [
-            BaseAnalyzer("DNS Analyzer", ["domain"]),
-            BaseAnalyzer("IP Analyzer", ["ip"]),
-            BaseAnalyzer("Hash Analyzer", ["hash"]),
-        ]
-
-    def supported_observables(self):
-        test_data = {"domain": "example.com", "ip": "8.8.8.8", "hash": "abcd1234"}
+class BaseAnalyzerTest(unittest.TestCase):
+    analyzer_class = None  # To be set by subclasses
+    
+    def test_supported_types(self):
+        if not self.analyzer_class:
+            self.skipTest("No analyzer class specified")
         
-        for analyzer in self.analyzers:
-            for obs_type in analyzer.supported_types:
-                result = analyzer.run(obs_type, test_data[obs_type])
-                self.assertIn(obs_type, result)
+        analyzer = self.analyzer_class()
+        print(analyzer.name)
+        for observable in analyzer.supported_types:
+            result = analyzer.run(observable)
+            self.assertIn(f"Analyzing {observable}", result)

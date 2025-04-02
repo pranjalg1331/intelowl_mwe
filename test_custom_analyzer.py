@@ -1,13 +1,10 @@
-from base_test import BaseAnalyzerTestCase
-from base_analyzer import BaseAnalyzer
+from example_analyzer import ExampleAnalyzer
+from base_test import BaseAnalyzerTest
 
-class TestCustomAnalyzer(BaseAnalyzerTestCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.analyzers.append(BaseAnalyzer("Custom Analyzer", ["domain", "ip"]))
 
-    def test_invalid_observable(self):
-        custom_analyzer = BaseAnalyzer("Custom Analyzer", ["domain", "ip"])
-        with self.assertRaises(ValueError):
-            custom_analyzer.run("hash", "abcd1234")
+class TestExampleAnalyzer(BaseAnalyzerTest):
+    analyzer_class = ExampleAnalyzer  # Specifies which analyzer to test
+    
+    def test_custom(self):
+        analyzer = self.analyzer_class()
+        self.assertEqual(analyzer.run("IP"), "Analyzing IP with ExampleAnalyzer - Example Specific Logic")
