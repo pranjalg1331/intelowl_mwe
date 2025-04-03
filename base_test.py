@@ -1,3 +1,5 @@
+# This is the base test class for all analyzers to run tests that are common among all
+
 import unittest
 
 class BaseAnalyzerTest(unittest.TestCase):

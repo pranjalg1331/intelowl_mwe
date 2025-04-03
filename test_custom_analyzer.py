@@ -1,3 +1,5 @@
+# indivisual test file for analyzers
+
 from example_analyzer import ExampleAnalyzer
 from base_test import BaseAnalyzerTest
 

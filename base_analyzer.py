@@ -1,3 +1,5 @@
+#This class is a mock version of analyzer base class
+
 class BaseAnalyzer:
     def __init__(self, name, supported_types):
         self.name = name

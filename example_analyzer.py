@@ -1,3 +1,5 @@
+# This is an example analyzer inheriting the base analyzer class
+
 from base_analyzer import BaseAnalyzer
 
 class ExampleAnalyzer(BaseAnalyzer):
